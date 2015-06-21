@@ -1,15 +1,34 @@
-## Put comments here that give an overall description of what your
-## functions do
+## a pair of functions that cache the inverse of a matrix.
 
-## Write a short comment describing this function
+## a example of how to use this pair of functions can be seen at:
+
+## This function creates a special "matrix" object that can cache its inverse.
 
 makeCacheMatrix <- function(x = matrix()) {
-
+  if (is.matrix(x) != T){
+    message("invalid input")
+  }
+  else{
+    cx <<- x
+    cinvx <<- solve(x)
+  }
 }
 
 
-## Write a short comment describing this function
+## This function computes the inverse of the special "matrix" returned by makeCacheMatrix above.
+## If the inverse has already been calculated (and the matrix has not changed),
+## then the cachesolve should retrieve the inverse from the cache.
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  if (is.matrix(x) != T){
+    print("invalid input")
+  }
+  else if (identical(x,cx) & class(cinvx)== "matrix"){
+    message("cache exists")
+    return(cinvx)
+  }
+  else{
+    message("cache does not exists")
+    return(solve(x))
+  }
 }
